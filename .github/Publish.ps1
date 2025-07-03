@@ -6,6 +6,7 @@ param(
 Get-PSResourceRepository | out-null
 
 Write-Host $PSScriptRoot
+Write-Host (Get-Location)
 
-$ModulePath = "..\Module\$TargetFolder"
+$ModulePath = ".\Module\$TargetFolder"
 Publish-PSResource -Path $ModulePath -ApiKey $Env:APIKEY
