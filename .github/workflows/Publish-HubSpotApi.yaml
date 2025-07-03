@@ -1,6 +1,8 @@
 name: Publish HubSpotApi
 
 on:
+    workflow_dispatch:
+        
     push:
         paths:
             - 'Module/HubSpotApi/**'
