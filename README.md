@@ -4,6 +4,8 @@ This module allows for interacting with the HubSpot API (e.g. creating/listing/u
 
 Please note that this module has limited functionality and does not implement all API functionality by design. It was designed with the intention of being able to automate basic CRUD operations for common objects.
 
+Link to Powershell Gallery page for this module: https://www.powershellgallery.com/packages/HubSpotApi/
+
 # Authentication
 
 Before you can use any other cmdlets, you need to run the 'Connect-HubSpotApi' cmdlet to authenticate to your instance.
