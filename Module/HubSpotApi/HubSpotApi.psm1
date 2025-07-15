@@ -811,13 +811,8 @@ function Get-HubSpotUser {
     }
 
     $Req = InvokeHubSpotApi -Endpoint $Endpoint
-
-    if($Id){
-        Return $Req
-    }
-    else {
-        Return $Req.results
-    }
+  
+    Return $Req
 }
 function Get-HubSpotOwner {
     <#
@@ -875,8 +870,13 @@ function Resolve-HubSpotOwner {
         [string]$OwnerId
     )
 
-    $Owner = Get-HubSpotOwner -Id $OwnerId
-    $Owner += Get-HubSpotOwner -Id $OwnerId
+    try{
+        $Owner = Get-HubSpotOwner -Id $OwnerId
+    }
+    catch{
+        $Owner = Get-HubSpotOwner -Id $OwnerId -Archived
+    }
+        
     $Properties = @(
         "hs_deactivated",
         "hs_email",
@@ -886,7 +886,7 @@ function Resolve-HubSpotOwner {
         "hs_object_id"
     ) -join ','
     
-    $User = Get-HubSpotUser -Properties $Properties | select -ExpandProperty properties | Where-Object{$_.hs_internal_user_id -eq $Owner.userId}
+    $User = Get-HubSpotUser -Properties $Properties | Select-Object -ExpandProperty properties | Where-Object{$_.hs_internal_user_id -eq $Owner.userId}
     
     Return $User
 }
