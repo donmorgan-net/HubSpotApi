@@ -780,22 +780,15 @@ function Get-HubSpotUser {
         Returns some basic properties by default, but you can include a list of properties to include. For a list of properties, see 'Get-HubSpotProperty -Object Users'
     .EXAMPLE
         #Specific properties to retrieve
-        $PropertiesArray =@(
-                "hs_deal_stage_probability",
-                "hs_forecast_probability",
-                "hs_manual_forecast_category",
-                "dealtype",
-                "dealstage",
-                "amount",
-                "createDate",
-                "closeDate",
-                "hs_closed_won_date"
+        $Properties =@(
+                "hs_job_title",
+                "hs_additional_phone"
         )
         $Properties = $PropertiesArray -join ','    
-        Get-HubSpotDeal -Id "23008365181" -Properties $Properties
+        Get-HubSpotUser -Id "23008365181" -Properties $Properties
 
-        #Get all deals
-        Get-HubSpotDeal
+        #Get all users
+        Get-HubSpotUser
     .LINK
         https://developers.hubspot.com/docs/guides/api/settings/users/user-details
     #>
