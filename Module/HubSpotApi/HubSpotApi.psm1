@@ -812,7 +812,12 @@ function Get-HubSpotUser {
 
     $Req = InvokeHubSpotApi -Endpoint $Endpoint
   
-    Return $Req
+    if($Id){
+        Return $Req    
+    }
+    else{
+        Return $Req.results
+    }
 }
 function Get-HubSpotOwner {
     <#
