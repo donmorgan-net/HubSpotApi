@@ -803,7 +803,7 @@ function Get-HubSpotUser {
         $Endpoint = "/crm/v3/objects/users/$Id"
     }
     else{
-        $Endpoint = "/crm/v3/objects/users/"
+        $Endpoint = "/crm/v3/objects/users"
     }
     
     if($Properties){
@@ -812,12 +812,7 @@ function Get-HubSpotUser {
 
     $Req = InvokeHubSpotApi -Endpoint $Endpoint
   
-    if($Id){
-        Return $Req    
-    }
-    else{
-        Return $Req.results
-    }
+    Return $Req
 }
 function Get-HubSpotOwner {
     <#
