@@ -965,3 +965,20 @@ function Search-HubSpot {
 
     Return $Results
 }
+function Get-HubSpotAccount{
+    param(
+        [Parameter(Mandatory = $false)]
+        [switch]$FullInfo
+    )
+
+    $Endpoint = "/account-info/v3/details"
+
+    $Req = InvokeHubSpotApi -Endpoint $Endpoint
+
+    if($FullInfo){
+        Return $Req
+    }
+    else{
+        Return $Req.portalId
+    }
+}
