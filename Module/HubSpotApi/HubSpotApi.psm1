@@ -310,6 +310,16 @@ function Set-HubSpotDeal {
     $Req = InvokeHubSpotApi -Endpoint $Endpoint -Body $PropertiesObject -Method Patch
     Return $Req
 }
+function Remove-HubSpotDeal {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Id
+    )
+    
+    $Endpoint = "/crm/v3/objects/deals/$Id"
+
+    InvokeHubSpotApi -Endpoint $Endpoint -Method Delete
+}
 function Get-HubSpotProperty {
     <#
     .SYNOPSIS
@@ -417,6 +427,16 @@ function Set-HubSpotCompany {
     if(-not $Req.id){
         Write-Error "Failed to update company"
     }
+}
+function Remove-HubSpotCompany {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Id
+    )
+    
+    $Endpoint = "/crm/v3/objects/companies/$Id"
+
+    InvokeHubSpotApi -Endpoint $Endpoint -Method Delete
 }
 function Get-HubSpotAssociation {
     <#
@@ -770,6 +790,16 @@ function New-HubSpotNote {
 
     return $Req
 
+}
+function Remove-HubSpotNote {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Id
+    )
+    
+    $Endpoint = "/crm/v3/objects/notes/$Id"
+
+    InvokeHubSpotApi -Endpoint $Endpoint -Method Delete
 }
 function Get-HubSpotUser {
     <#
