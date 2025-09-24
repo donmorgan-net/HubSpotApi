@@ -689,6 +689,45 @@ function Set-HubSpotContact{
 
     Return $Req.id
 }
+function New-HubSpotContact {
+    <#
+    .SYNOPSIS
+        Creates a new contact in HubSpot.
+    .DESCRIPTION
+        Creates a new contact in HubSpot with given properties which are passed as a JSON object.
+    .EXAMPLE
+        #Create new contact
+        $Properties =@{
+            properties = @{
+            "pipeline" = $PipelineId
+            "dealstage" = $StageId
+            "dealname" = "Test Dealio"
+            }
+        } | ConvertTo-Json
+        New-HubSpotContact -PropertiesObject $PropertiesObject
+    .LINK
+        https://developers.hubspot.com/docs/guides/api/crm/objects/contacts#create-contacts
+    #>
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$PropertiesObject
+    )
+
+    $Endpoint = "/crm/v3/objects/contacts"
+
+    $Req = InvokeHubSpotApi -Endpoint $Endpoint -Body $PropertiesObject -Method Post
+    Return $Req
+}
+function Remove-HubSpotContact {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Id
+    )
+    
+    $Endpoint = "/crm/v3/objects/contacts/$Id"
+
+    InvokeHubSpotApi -Endpoint $Endpoint -Method Delete
+}
 function Get-HubSpotNote {
     <#
     .SYNOPSIS
